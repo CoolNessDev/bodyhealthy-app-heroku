@@ -1,0 +1,96 @@
+.mobile-title{
+  color: white !important;
+}
+@media (max-width: 991px){
+  .mobile-title{
+    display: none;
+  }
+}
+.get-started-btn{
+  background:rgba(0, 0, 0, 0);
+}
+.btn-warning{
+  background: #ffc451;
+}
+.form-check-input:checked {
+  background-color: #ffc451;
+  border-color: #ffc451;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+input[type="checkbox"]:focus,
+input[type="file"]:focus,
+select:focus,
+.uneditable-input:focus {
+  border-color:#ffc451;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #ffc451;
+  outline: 0 none;
+}
+.dropUserMenu{
+  background:  rgba(51, 51, 51,1);
+  color: white;
+  width: 140%;
+  padding: 0.5em;
+}
+.dropitem{
+  color:white;
+}
+.dropitem:hover{
+  background-color: black;
+}
+.dropLink:hover{
+  background-color: rgba(51, 51, 51,1);
+}
+.userImg,.username{
+  display: inline;
+  margin-left: 0.5em;
+}
+.dropdown a{
+  cursor: pointer;
+}
+.dropdownLink{
+  color: white;
+}
+@media (max-width: 991px){
+  .navbar a i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+  }
+  .bi-chevron-down::before {
+    content: "^";
+  }
+  .bi-chevron-right::before {
+    content: "^";
+  }
+  [class^="bi-"]::before, [class*=" bi-"]::before {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .dropdownLink{
+    color: black;
+  }
+}
+
+

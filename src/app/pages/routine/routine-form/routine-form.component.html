@@ -1,0 +1,203 @@
+<div class="d-flex" id="wrapper">
+  <bh-spinner [message]="spinnerMessage"></bh-spinner>
+  <!-- Page content wrapper-->
+  <div
+    id="page-content-wrapper flex-grow-1 bd-highlight"
+    class="cards-cont"
+    (dragover)="onDragOver($event)"
+    (drop)="onCardDrop($event,null)"
+  >
+    <div class="row justify-content-between mt-3 ms-1">
+      <div class="col-4">
+        <div ngbDropdown class="">
+          <button
+            class="btn btn-outline-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            Musculos
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button (click)="onMuscle(1)" ngbDropdownItem>Abdominales</button>
+            <button (click)="onMuscle(2)" ngbDropdownItem>Espalda</button>
+            <button (click)="onMuscle(3)" ngbDropdownItem>Brazos</button>
+            <button (click)="onMuscle(4)" ngbDropdownItem>Hombros</button>
+            <button (click)="onMuscle(5)" ngbDropdownItem>Gluteos</button>
+            <button (click)="onMuscle(6)" ngbDropdownItem>Piernas</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 me-3">
+        <div class="input-group">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="buscar"
+            aria-describedby="search-addon"
+            [formControl]="nameSearched"
+          />
+          <button (click)="onSearch()" type="button" class="btn btn-outline-primary">Buscar</button>
+        </div>
+      </div>
+    </div>
+    <!-- Page content-->
+    <div class="row row-cols-2" id="cardZone">
+      <!-- card -->
+      <div
+        *ngFor="let exercise of exercises"
+        [id]="exercise.idEjercicio"
+        class="card col shadow m-2 bg-body rounded"
+        style="width: 18rem"
+        draggable="true"
+        (dragstart)="onDragStart($event,exercise)"
+      >
+        <ng-container *ngIf="itemsDrop[exercise.idEjercicio]; else elseTemplate">
+          <button
+            type="button"
+            class="addCard"
+            (click)="onDrop($event, exercise)"
+            >
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <button
+            type="button"
+            class="addCard"
+            (click)="onCardDrop($event, exercise)"
+          >
+            <span aria-hidden="true">&larr;</span>
+          </button>
+        </ng-template>
+
+        <div class="card-body">
+          <h5 class="card-title">{{ exercise.nombre }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ exercise.idEjercicio }}
+          </h6>
+          <p class="card-text">
+            {{ exercise.descripcion }}
+          </p>
+        </div>
+      </div>
+      <!-- end Card -->
+    </div>
+    <div class="mt-2">
+      <bh-alert
+      *ngIf="!loaded"
+      [alertClass]="'alert-primary'"
+      [message]="'Cargando ejercicios....'"
+    ></bh-alert>
+    <bh-alert
+      *ngIf="error"
+      [alertClass]="'alert-danger'"
+      [message]="'Error al cargar ejercicios'"
+    ></bh-alert>
+    </div>
+    <!-- End page content -->
+  </div>
+  <!-- Rutina Sidebar-->
+  <div
+    class="border-start bg-white container"
+    id="sidebar-wrapper"
+    (dragover)="onDragOver($event)"
+    (drop)="onDrop($event,null)"
+  >
+    <h4 class="sidebar-heading border-bottom">Rutina</h4>
+    <!-- DropZone -->
+    <div id="" class="list-group list-group-flush list-content">
+      <div
+        *ngFor="let exercise of exercisesDrop"
+        [id]="exercise.idEjercicio"
+        class="card col shadow m-2 bg-body rounded"
+        style="width: 18rem"
+        draggable="true"
+        (dragstart)="onDragStart($event,exercise)"
+      >
+        <ng-container *ngIf="itemsDrop[exercise.idEjercicio]; else elseTemplate">
+          <button
+            type="button"
+            class="addCard"
+            (click)="onDrop($event, exercise)"
+            >
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <button
+            type="button"
+            class="addCard"
+            (click)="onCardDrop($event, exercise)"
+          >
+            <span aria-hidden="true">&larr;</span>
+          </button>
+        </ng-template>
+
+        <div class="card-body">
+          <h5 class="card-title">{{ exercise.nombre }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ exercise.idEjercicio }}
+          </h6>
+          <p class="card-text">
+            {{ exercise.descripcion }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+<a class="fixedButton">
+  <button
+    type="submit"
+    class="btn btn-warning roundedFixedBtn"
+    (click)="open(content)"
+    >
+    Guardar
+  </button>
+</a>
+<!-- Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nueva rutina</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- Modal body -->
+  <div class="modal-body">
+    <form [formGroup]="newRutineForm" (ngSubmit)="save()" #f="ngForm">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" formControlName="name" required />
+      <hr />
+      <label class="form-label">Nivel</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        formControlName="nivel"
+      >
+        <option value="Principiante" selected>Principiante</option>
+        <option value="Intermedio">Intermedio</option>
+        <option value="Avanzado">Avanzado</option>
+      </select>
+    </form>
+  </div>
+  <!-- End modal body -->
+  <div class="modal-footer">
+    <button
+      type="submit"
+      class="btn btn-outline-dark"
+      [disabled]="newRutineForm.invalid"
+      (click)="modal.close(save())"
+    >
+      Confirmar
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,15 @@
+<div>
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" (click)="sendPage(-1,true)" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let item of pages"><a class="page-link" [ngClass]="currentPage===item?'page-active':''" (click)="sendPage(item)">{{item}}</a></li>
+    <li class="page-item">
+      <a class="page-link" (click)="sendPage(1,true)" aria-label="Next" >
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</div>

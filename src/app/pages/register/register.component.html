@@ -1,0 +1,116 @@
+<div class="container mt-10">
+  <bh-spinner [message]="'Registrando usuario'"></bh-spinner>
+  <bh-alert
+    *ngIf="error"
+    [alertClass]="'alert-danger'"
+    [message]="errorMessage"
+  ></bh-alert>
+  <bh-spinner [message]="'Accediento'"></bh-spinner>
+  <div class="row justify-content-center mt-5">
+    <div class="">
+      <div class="card shadow">
+        <div class="card-title text-center border-bottom">
+          <h2 class="p-3">Registro de usuario</h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+            <div class="row justify-content-between text-left">
+              <div class="form-group col-sm-6 flex-column d-flex">
+                <label for="name" class="form-label">Nombres</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  formControlName="name"
+                />
+              </div>
+              <div class="form-group col-sm-6 flex-column d-flex">
+                <label for="surname" class="form-label">Apellidos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="surname"
+                  formControlName="surname"
+                />
+              </div>
+            </div>
+            <div class="row justify-content-between text-left">
+              <div class="form-group col-sm-6 flex-column d-flex">
+                <label for="username" class="form-label">Correo</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="username"
+                  formControlName="username"
+                />
+              </div>
+              <div class="form-group col-sm-6 flex-column d-flex">
+                <label for="date" class="form-label">Fecha de nacimiento</label>
+                <div class="input-group">
+                  <input
+                    id="date"
+                    type="datetime"
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dp"
+                    formControlName="date"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary calendar"
+                      (click)="d.toggle()"
+                      type="button"
+                    >
+                      <img
+                        width="20px"
+                        src="../../../assets/icons/calendar.svg"
+                        alt=""
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <pre>Model: {{ date.value | json }}</pre> -->
+            <div class="row justify-content-between text-left">
+              <div class="form-group col-sm-6 flex-column d-flex">
+                <label for="password" class="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  formControlName="password"
+                />
+              </div>
+              <div class="form-group col-sm-6 flex-column d-flex">
+                <label for="password2" class="form-label"
+                  >Confirmar contraseña</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password2"
+                  formControlName="password2"
+                />
+              </div>
+            </div>
+            <br>
+            <div class="d-grid">
+              <button
+                [disabled]="registerForm.invalid"
+                type="submit"
+                class="btn btn-warning"
+              >
+                Registrarse
+              </button>
+              <br />
+              <a routerLink="/login">¿Ya tienes una cuenta?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<section id="hero" class="d-flex align-items-center justify-content-center">
+  <div class="container" data-aos="fade-up">
+    <div
+      class="row gy-4 mt-5 justify-content-center"
+      data-aos="zoom-in"
+      data-aos-delay="250"
+    >
+      <div class="col-xl-2 col-md-4 divButton" (click)="onFetch(1)">
+        <div class="icon-box">
+          <i class="ri-bar-chart-box-line"><img width="80px" src="../../../../assets/img/abs.svg" alt=""></i>
+          <h3><a>Abdominales</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4 divButton" (click)="onFetch(2)">
+        <div class="icon-box">
+          <i class="ri-bar-chart-box-line"><img width="80px" src="../../../../assets/img/back.svg" alt=""></i>
+          <h3><a>Espalda</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4 divButton" (click)="onFetch(3)">
+        <div class="icon-box">
+          <i class="ri-bar-chart-box-line"><img width="80px" src="../../../../assets/img/bicep.svg" alt=""></i>
+          <h3><a>Brazos</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4 divButton" (click)="onFetch(4)">
+        <div class="icon-box">
+          <i class="ri-bar-chart-box-line"><img width="80px" src="../../../../assets/img/shoulder .svg" alt=""></i>
+          <h3><a>Hombros</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4 divButton" (click)="onFetch(5)">
+        <div class="icon-box">
+          <i class="ri-bar-chart-box-line"><img width="80px" src="../../../../assets/img/buttocks.svg"></i>
+          <h3><a>Gluteos</a></h3>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4 divButton" (click)="onFetch(6)">
+        <div class="icon-box">
+          <i class="ri-bar-chart-box-line"><img width="80px" src="../../../../assets/img/legs.svg" alt=""></i>
+          <h3><a>Piernas</a></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <div class="container" id="grid">
+    <div
+      *ngIf="exercises && exercises.length > 0"
+    >
+      <bh-card
+        *ngFor="let exercise of exercises"
+        [exercise]="exercise"
+      ></bh-card>
+    </div>
+    <bh-alert *ngIf="!loaded" [alertClass]="'alert-primary'" [message]="'Cargando ejercicios....'"></bh-alert>
+    <bh-alert *ngIf="error" [alertClass]="'alert-danger'" [message]="'Error al cargar ejercicios'"></bh-alert>
+  </div>

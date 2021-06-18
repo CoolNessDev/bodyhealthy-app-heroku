@@ -1,0 +1,110 @@
+<div class="card mb-4">
+  <bh-spinner [message]="spinnerMessage"></bh-spinner>
+  <div class="card-header">
+    <img
+      class="rounded-circle userImg"
+      width="30px"
+      height="30px"
+      alt="100x100"
+      [src]="publication.usuario.imagen"
+      data-holder-rendered="true"
+    />
+    <span class="userName">
+      {{ publication.usuario.nombres }} {{ publication.usuario.apellidos }}
+    </span>
+    <div ngbDropdown class="toggleButton">
+      <ng-container *ngIf="options">
+        <i ngbDropdownToggle
+          ><img width="30px" src="../../../../assets/icons/points.svg"
+        /></i>
+        <div ngbDropdownMenu>
+          <button (click)="onDelete()" ngbDropdownItem>
+            Eliminar
+            <i class="icon"
+              ><img width="20px" src="../../../../assets/icons/delete.svg"
+            /></i>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="date">{{ publication.fecha | date: format }}</p>
+    <p class="card-text">
+      {{ publication.mensaje }}
+    </p>
+    <img
+      *ngIf="publication.imagen"
+      [src]="publication.imagen"
+      class="img-fluid"
+      alt="..."
+    />
+  </div>
+  <!-- activeIds="ngb-panel-0" -->
+  <ngb-accordion #acc="ngbAccordion" activeIds="">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span class="btn-link" (click)="onShowComentaries()">Comentarios</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <!-- commentaries container -->
+        <ng-container
+          *ngIf="
+            commentaries && commentaries.length > 0;
+            else elseTemplate
+          "
+        >
+          <bh-commentary
+            *ngFor="let commentary of commentaries"
+            [commentary]="commentary"
+          ></bh-commentary>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <bh-circle-spinner *ngIf="commentariesLoading"></bh-circle-spinner>
+          <h1 *ngIf="!commentariesLoading">Sin comentarios</h1>
+        </ng-template>
+        <!-- commentary form -->
+        <form
+          [formGroup]="commentaryForm"
+          (ngSubmit)="onComment()"
+          novalidate
+          #f="ngForm"
+        >
+          <label for="exampleFormControlTextarea1" class="form-label"
+            ><img
+              class="rounded-circle userImg"
+              width="30px"
+              height="30px"
+              alt="100x100"
+              [src]="
+                user.imagen && user.imagen!='null'
+                  ? getUrl(user.imagen)
+                  : 'https://i.ibb.co/SyGszR2/descargar.jpg'
+              "
+              data-holder-rendered="true"
+            />
+            <span class="userName">{{
+              user.nombres ? user.nombres : "Yo (Inicia sesión para comentar)"
+            }}</span></label
+          >
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="2"
+            formControlName="message"
+          ></textarea>
+          <div class="btn-send mt-2">
+            <button
+              type="submit"
+              class="btn btn-warning"
+              [disabled]="commentaryForm.invalid"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

@@ -1,0 +1,81 @@
+.card-header {
+  display: flex;
+  align-items: center;
+}
+.userName{
+  margin-left: 0.5em;
+}
+.toggleButton{
+  cursor: pointer;
+  margin-left: auto;
+}
+.dropdown-item {
+  display: flex;
+}
+.icon{
+  margin-left: auto;
+
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.btn-send{
+  display: flex;
+  justify-content: flex-end;
+}
+textarea:focus,
+.uneditable-input:focus {
+  border-color:#ffc451;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #ffc451;
+  outline: 0 none;
+}
+/* input file */
+input[type="file"]{
+  /* display: none; */
+  width: 30px;
+}
+.file-select {
+  position: relative;
+  display: inline-block;
+  width:30px;
+}
+
+.file-select::before {
+  /* background-color: #5678ef; */
+  color: white;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  border-radius: 3px;
+  content: '';
+  position: absolute;
+  /* left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0; */
+}
+
+.file-select input[type='file'] {
+  opacity: 0;
+  /* width: 200px;
+  height: 32px; */
+  /* display: inline-block; */
+}
+
+#src-file1::before {
+  /* content: url('../../../../assets/icons/attachImg.svg'); */
+  /* width: 20px; */
+  background-image: url('../../../../assets/icons/attachImg.svg');
+  background-size: 30px 30px;
+  height: 30px;
+  width: 30px;
+}
+.more-button{
+  background-color: transparent;
+  border: none;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+.btn-link{
+  color: #f7a80b;
+}

@@ -1,0 +1,28 @@
+<div class="container mt-10">
+  <bh-spinner [message]="spinnerMessage"></bh-spinner>
+  <div class="row row-cols-2">
+    <div *ngFor="let routine of routines" class="card col shadow m-2 bg-body rounded" style="width: 18rem;">
+      <div class="card-body" routerLink="/rutinas/ejercicios/{{routine.idRutina}}">
+        <h5 class="card-title">{{routine.nombre}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{routine.nivel}}</h6>
+        <ng-container *ngIf="routine.id_ejercicio.length>0; else elseTemplate">
+          <p class="card-text">{{routine.id_ejercicio.length}} ejercicios</p>
+
+        </ng-container>
+        <ng-template #elseTemplate>
+
+          <p class="card-text">Sin ejercicios</p>
+        </ng-template>
+      </div>
+      <div *ngIf="isAdmin" class="card-body">
+        <a href="rutinas/editar/{{routine.idRutina}}" class="card-link">Editar</a>
+        <a class="card-link" (click)="onDelete(routine.idRutina)">Eliminar</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<a class="fixedButton" routerLink="/rutinas/crear">
+  <div class="roundedFixedBtn"><img class="icon" width="40px" src="../../../../assets/icons/add.svg" alt=""></div>
+</a>

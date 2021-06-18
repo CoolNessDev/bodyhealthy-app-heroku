@@ -1,0 +1,68 @@
+<main id="main" class="container mt-10">
+  <bh-spinner [message]="spinnerMessage"></bh-spinner>
+  <form
+    [formGroup]="publicationForm"
+    (ngSubmit)="onPublicate()"
+    novalidate
+    #f="ngForm"
+  >
+    <div class="card mb-2">
+      <div class="card-header">
+        <img
+          class="rounded-circle userImg"
+          width="30px"
+          height="30px"
+          alt="100x100"
+          [src]="
+            user.imagen && user.imagen!='null'? getUrl(user.imagen) : 'https://i.ibb.co/SyGszR2/descargar.jpg'
+          "
+          data-holder-rendered="true"
+        />
+        <span class="userName">{{ user.nombres ? user.nombres : "Yo (Inicia sesión para publicar)" }}</span>
+        <div class="file-select icon" id="src-file1">
+          <input
+            type="file"
+            name="src-file1"
+            aria-label="Archivo"
+            (change)="onFileChange($event)"
+          />
+        </div>
+      </div>
+      <div class="card-body">
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="2"
+          formControlName="message"
+        ></textarea>
+        <img *ngIf="newImg" [src]="imagenSrc" class="img-fluid" alt="..." />
+        <!-- <img src="https://images.pexels.com/photos/35888/amazing-beautiful-breathtaking-clouds.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid mt-2" alt="..."> -->
+        <div class="btn-send mt-2">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            [disabled]="publicationForm.invalid"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <ng-container
+    *ngIf="publications && publications.length > 0; else elseTemplate"
+  >
+    <bh-article
+      *ngFor="let publication of publications"
+      [publication]="publication"
+    ></bh-article>
+    <button *ngIf="pageValidator" class="more-button" (click)="onMore()">
+      <span class="btn-link">Ver mas</span>
+    </button>
+    <bh-circle-spinner *ngIf="pageLoading"></bh-circle-spinner>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <h1>Sin publicaciones</h1>
+  </ng-template>
+
+</main>

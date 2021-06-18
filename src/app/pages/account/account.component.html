@@ -1,0 +1,80 @@
+<div class="container mt-10">
+  <img
+    class="rounded-circle userImg mb-4 me-4"
+    width="100px"
+    height="100px"
+    alt="100x100"
+    [src]="
+      user&& user.imagen? getUrl(user.imagen)
+        : 'https://i.ibb.co/SyGszR2/descargar.jpg'
+    "
+    data-ho
+    lder-rendered="true"
+  />
+
+  <form [formGroup]="userForm" (ngSubmit)="onSave()">
+    <!-- <input
+      type="file"
+      name="src-file1"
+      aria-label="Archivo"
+      (change)="onFileChange($event)"
+    /> -->
+    <div class="row justify-content-between text-left">
+      <div class="form-group col-sm-6 flex-column d-flex">
+        <label for="name" class="form-label">Nombres</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          disabled
+        />
+      </div>
+      <div class="form-group col-sm-6 flex-column d-flex">
+        <label for="surname" class="form-label">Apellidos</label>
+        <input
+          type="text"
+          class="form-control"
+          id="surname"
+          formControlName="surname"
+          disabled
+        />
+      </div>
+    </div>
+    <div class="row justify-content-between text-left">
+      <div class="form-group col-sm-6 flex-column d-flex">
+        <label for="username" class="form-label">Correo</label>
+        <input
+          type="email"
+          class="form-control"
+          id="username"
+          formControlName="username"
+          disabled
+        />
+      </div>
+      <div class="form-group col-sm-6 flex-column d-flex">
+        <label for="date" class="form-label">Edad</label>
+        <div class="input-group">
+          <input
+            type="email"
+            class="form-control"
+            id="username"
+            formControlName="date"
+            disabled
+          />
+        </div>
+      </div>
+    </div>
+    <!-- <br />
+    <div class="d-grid">
+      <button
+        [disabled]="userForm.invalid"
+        type="submit"
+        class="btn btn-warning"
+      >
+        Cambiar datos
+      </button>
+      <br />
+    </div> -->
+  </form>
+</div>

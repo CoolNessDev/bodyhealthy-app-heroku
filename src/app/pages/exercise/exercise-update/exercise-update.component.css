@@ -1,0 +1,36 @@
+input[type=range]::-webkit-slider-thumb {
+  background: #ffc451;
+}
+input[type=range]::-moz-range-thumb {
+  background: #ffc451;
+}
+input[type=range]::-ms-thumb {
+  background: #ffc451;
+}
+.form-check-input:checked {
+  background-color: #ffc451;
+  border-color: #ffc451;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+input[type="checkbox"]:focus,
+input[type="file"]:focus,
+select:focus,
+.uneditable-input:focus {
+  border-color:#ffc451;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #ffc451;
+  outline: 0 none;
+}

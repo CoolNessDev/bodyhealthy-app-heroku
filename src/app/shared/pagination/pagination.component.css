@@ -1,0 +1,12 @@
+.page-link {
+  cursor: pointer;
+  color: #ffc451;
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+.page-link:hover{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.page-active{
+  background-color: rgba(0, 0, 0, 0.8);
+}

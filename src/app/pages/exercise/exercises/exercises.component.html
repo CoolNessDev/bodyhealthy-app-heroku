@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div class="row justify-content-between mb-3 mt-10">
+    <div class="col-4">
+      <bh-pagination #pagination (pageEvent)="receivePage($event)" [numberPages]="totalPages" [currentPage]="currentPageExercise"></bh-pagination>
+    </div>
+    <div class="col-4">
+      <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="buscar" aria-label="Search"
+          aria-describedby="search-addon"[formControl]="nameSearched" />
+        <button type="button" class="btn btn-outline-primary" (click)="onSearch()">Buscar</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="exercises && exercises.length > 0">
+    <bh-card *ngFor="let exercise of exercises" [exercise]="exercise"></bh-card>
+  </div>
+  <bh-alert
+    *ngIf="!loaded"
+    [alertClass]="'alert-primary'"
+    [message]="'Cargando ejercicios....'"
+  ></bh-alert>
+  <bh-alert
+    *ngIf="error"
+    [alertClass]="'alert-danger'"
+    [message]="'Error al cargar ejercicios'"
+  ></bh-alert>
+  <bh-pagination #pagination (pageEvent)="receivePage($event)" [numberPages]="totalPages" [currentPage]="currentPageExercise"></bh-pagination>
+</div>
+

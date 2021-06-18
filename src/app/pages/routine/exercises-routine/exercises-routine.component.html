@@ -1,0 +1,23 @@
+<bh-spinner [message]="spinnerMessage"></bh-spinner>
+<div class="container">
+  <h1>Rutina {{routine?routine.nombre:''}}</h1>
+  <h2> {{routine?routine.nivel:'Nivel'}} </h2>
+  <br>
+
+  <p><ngb-progressbar [type]="routineState>=100?'warning':'dark'" textType="white" [value]="routineState" [showValue]="true"></ngb-progressbar></p>
+  <br>
+  <div *ngIf="routine && routine.ejercicios && routine.ejercicios.length > 0">
+    <bh-card *ngFor="let exercise of routine.ejercicios" [onRutine]="true" [exercise]="exercise" (checkEvent)="receiveCheck($event)"></bh-card>
+  </div>
+  <p><ngb-progressbar [type]="routineState>=100?'warning':'dark'" textType="white" [value]="routineState" [showValue]="true"></ngb-progressbar></p>
+  <bh-alert
+    *ngIf="!loaded"
+    [alertClass]="'alert-primary'"
+    [message]="'Cargando ejercicios....'"
+  ></bh-alert>
+  <bh-alert
+    *ngIf="error"
+    [alertClass]="'alert-danger'"
+    [message]="'Error al cargar ejercicios'"
+  ></bh-alert>
+</div>

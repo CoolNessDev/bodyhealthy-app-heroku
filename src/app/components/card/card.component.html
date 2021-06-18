@@ -1,0 +1,99 @@
+
+  <bh-spinner [message]="'Eliminando ejercicio'"></bh-spinner>
+  <section id="counts" class="counts shadow p-3 mb-5 bg-body rounded">
+    <div class="container" data-aos="fade-up">
+      <div class="row no-gutters">
+        <div
+          class="
+            image
+            col-xl-5
+            d-flex
+            align-items-stretch
+            justify-content-center justify-content-lg-start
+          "
+          data-aos="fade-right"
+          data-aos-delay="100"
+        >
+          <img
+            width="400px"
+            [src]="exerciseImagen"
+            class="img-fluid"
+            alt=""
+          />
+        </div>
+        <div
+          class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch"
+          data-aos="fade-left"
+          data-aos-delay="100"
+        >
+          <div class="content d-flex flex-column justify-content-center">
+            <h3>{{exercise.nombre}}</h3>
+            <p>{{exercise.descripcion}}</p>
+            <br />
+            <div class="row justify-content-between text-left">
+              <div class="form-group col-sm-1 flex-column d-flex">
+                <h5>
+                  <span class="badge shadow-sm p-3 mb-5 bg-body rounded text-dark"
+                    ><img
+                      width="20px"
+                      src="../../../assets/icons/clock.svg"
+                      alt=""
+                    />&nbsp;{{exercise.duracion}} minut.</span
+                  >
+                </h5>
+              </div>
+              <div class="form-group col-sm-1 flex-column d-flex">
+                <h5>
+                  <span class="badge shadow-sm p-3 mb-5 bg-body rounded text-dark"
+                    ><img
+                      width="20px"
+                      src="../../../assets/icons/serie.svg"
+                      alt=""
+                    />&nbsp;{{exercise.series}} series</span
+                  >
+                </h5>
+              </div>
+              <div class="form-group col-sm-1 flex-column d-flex">
+                <h5>
+                  <span class="badge shadow-sm p-3 mb-5 bg-body rounded text-dark"
+                    ><img
+                      width="20px"
+                      src="../../../assets/icons/repeticion.svg"
+                      alt=""
+                    />&nbsp;{{exercise.repeticiones}} repet.</span
+                  >
+                </h5>
+              </div>
+              <div class="form-group col-sm-3 flex-column d-flex">
+                <h5>
+                  <span class="badge shadow-sm p-3 mb-5 bg-body rounded text-dark"
+                    ><img
+                      width="20px"
+                      src="../../../assets/icons/break.svg"
+                      alt=""
+                    />&nbsp;{{exercise.descanso}} segund.</span
+                  >
+                </h5>
+              </div>
+            </div>
+            <div class="">
+              <button *ngIf="isAdmin" class="btn btn-warning" routerLink="/ejercicios/editar/{{exercise.idEjercicio}}" >Editar</button >
+                &nbsp;
+                <button *ngIf="isAdmin" class="btn btn-danger" routerLink="/ejercicios" (click)="borrar(exercise.idEjercicio)">Eliminar</button >
+                  &nbsp;
+                  <div *ngIf="onRutine" class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" [value]="1"
+                    [checked]="exerciseCheck"
+                    (change)="onCheckChange($event)"
+                    >
+                    <label class="form-check-label">Completado</label>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------->

@@ -1,0 +1,180 @@
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center justify-content-lg-between">
+    <h1 class="logo me-auto me-lg-0">
+      <a href="#hero"
+        >B<span class="mobile-title">odyHealthy</span><span>.</span></a
+      >
+    </h1>
+    <nav
+      id="navbar"
+      class="navbar order-last order-lg-0"
+      [ngClass]="butguerStatus ? 'navbar-mobile' : ''"
+    >
+      <ul>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [ngClass]="activeSection[0] ? 'active' : ''"
+            href="#hero"
+            >Inicio</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/noticias"
+            class="nav-link scrollto"
+            [ngClass]="activeSection[1] ? 'active' : ''"
+            href="#about"
+            >Noticias</a
+          >
+        </li>
+        <li class="dropdown">
+          <a class="dropdownLink" [ngClass]="activeSection[2] ? 'active' : ''"
+            ><span routerLink="/rutinas">Rutinas</span>
+            <i class="bi bi-chevron-down" (click)="onArrowClick(0, 0)"></i
+          ></a>
+          <ul [ngClass]="arrowStatus[0][0] ? 'dropdown-active' : ''">
+            <li class="dropdown">
+              <a
+                ><span routerLink="/rutinas">Nivel</span>
+                <i class="bi bi-chevron-right" (click)="onArrowClick(0, 1)"></i
+              ></a>
+              <ul [ngClass]="arrowStatus[0][1] ? 'dropdown-active' : ''">
+                <li><a href="/rutinas/principiante">Principiante</a></li>
+                <li><a href="/rutinas/intermedio">Intermedio</a></li>
+                <li><a href="/rutinas/avanzado">Avanzado</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdownLink" [ngClass]="activeSection[3] ? 'active' : ''"
+            ><span routerLink="/ejercicios">Ejercicios</span>
+            <i class="bi bi-chevron-down" (click)="onArrowClick(1, 0)"></i
+          ></a>
+          <ul [ngClass]="arrowStatus[1][0] ? 'dropdown-active' : ''">
+            <li *ngIf="isAdmin">
+              <a routerLink="/ejercicios/insertar">Insertar</a>
+            </li>
+            <li class="dropdown">
+              <a
+                ><span routerLink="/ejercicios/musculos">Musculos</span>
+                <i class="bi bi-chevron-right" (click)="onArrowClick(1, 1)"></i
+              ></a>
+              <ul [ngClass]="arrowStatus[1][1] ? 'dropdown-active' : ''">
+                <li><a href="/ejercicios/musculos/1">Abdominales</a></li>
+                <li><a href="/ejercicios/musculos/2">Espalda</a></li>
+                <li><a href="/ejercicios/musculos/3">Brazos</a></li>
+                <li><a href="/ejercicios/musculos/4">Hombros</a></li>
+                <li><a href="/ejercicios/musculos/5">Gluteos</a></li>
+                <li><a href="/ejercicios/musculos/6">Piernas</a></li>
+              </ul>
+            </li>
+            <li><a routerLink="/ejercicios">Ver ejercicios</a></li>
+          </ul>
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            href="#contact"
+            [ngClass]="activeSection[4] ? 'active' : ''"
+            >Contacto</a
+          >
+        </li>
+      </ul>
+      <i
+        class="bi mobile-nav-toggle"
+        [ngClass]="butguerStatus ? 'bi-x' : 'bi-list'"
+        (click)="onBurguerClick()"
+        ><img width="35px" src="../../../assets/icons/burguer.svg"
+      /></i>
+    </nav>
+    <a *ngIf="!isLogged" class="get-started-btn scrollto" routerLink="/login"
+      >Get Started</a
+    >
+    <div *ngIf="isLogged" class="row">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button
+            class="get-started-btn scrollt"
+            id="dropdownForm1"
+            ngbDropdownToggle
+          >
+            Mi cuenta
+          </button>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="dropdownForm1"
+            class="dropUserMenu"
+          >
+            <img
+              class="rounded-circle userImg"
+              width="30px"
+              height="30px"
+              alt="100x100"
+              [src]="
+                userImg && userImg!='null'? getUrl(userImg) : 'https://i.ibb.co/SyGszR2/descargar.jpg'
+              "
+              data-holder-rendered="true"
+            />
+            <label class="username">{{
+              userNames ? userNames : "Usuario"
+            }}</label>
+            <div class="dropdown-divider"></div>
+            <button ngbDropdownItem class="dropitem" routerLink="/micuenta">Mi perfil</button>
+            <div class="dropdown-divider"></div>
+            <button
+              routerLink="/rutinas/misrutinas"
+              ngbDropdownItem
+              class="dropitem"
+            >
+              Mis rutinas
+            </button>
+            <div class="dropdown-divider"></div>
+            <button
+              routerLink="/noticias/mispublicaciones"
+              ngbDropdownItem
+              class="dropitem"
+            >
+              Mis Publicaciones
+            </button>
+            <div class="dropdown-divider"></div>
+            <button ngbDropdownItem class="dropLink">
+              <a href="" (click)="onLogOut()">Cerrar sesión</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Drop login -->
+<!-- <div class="row">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="get-started-btn scrollt" id="dropdownForm1" ngbDropdownToggle>Toggle dropdown</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+        <form class="px-4 py-3">
+          <div class="form-group">
+            <label for="exampleDropdownFormEmail1">Correo</label>
+            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" autocomplete="username" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleDropdownFormPassword1">Contraseña</label>
+            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" autocomplete="current-password" required>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="dropdownCheck">
+            <label class="form-check-label" for="dropdownCheck">
+              Recuerdame
+            </label>
+          </div>
+          <button type="submit" class="btn btn-warning">Ingresar</button>
+        </form>
+        <div class="dropdown-divider"></div>
+        <button ngbDropdownItem>Registrate</button>
+        <button ngbDropdownItem>Olvidé mi contraseña</button>
+      </div>
+    </div>
+  </div>
+</div> -->
